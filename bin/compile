@@ -176,12 +176,12 @@ if [ -d $CACHE_STORE_DIR ]; then
 
   # copy the cached node_modules in - don't mkdir first to effectively recreate the CACHE_STORE_DIR as CACHE_TARGET_DIR
   echo "restoring from ${CACHE_STORE_DIR}/ to ${CACHE_TARGET_DIR}"
-  cp -av $CACHE_STORE_DIR/ $CACHE_TARGET_DIR
+  cp -a $CACHE_STORE_DIR/ $CACHE_TARGET_DIR
 
   # move existing node_modules back into place
   if [ -d $TEMP_NODE_MODULES_DIR/node_modules ]; then
     echo "restoring from ${TEMP_NODE_MODULES_DIR}/node_modules/* to ${CACHE_TARGET_DIR}/"
-    cp -Rv $TEMP_NODE_MODULES_DIR/node_modules/* $CACHE_TARGET_DIR/
+    cp -R $TEMP_NODE_MODULES_DIR/node_modules/* $CACHE_TARGET_DIR/
   fi
 
 fi
@@ -198,5 +198,5 @@ if [ -d $CACHE_TARGET_DIR ]; then
   rm -rf $CACHE_STORE_DIR
   mkdir -p $(dirname $CACHE_STORE_DIR) # Just make the parent dir to effectively recreate the CACHE_TARGET_DIR as CACHE_STORE_DIR
   echo "caching to ${CACHE_STORE_DIR} from ${CACHE_TARGET_DIR}/"
-  cp -av $CACHE_TARGET_DIR/ $CACHE_STORE_DIR
+  cp -a $CACHE_TARGET_DIR/ $CACHE_STORE_DIR
 fi
