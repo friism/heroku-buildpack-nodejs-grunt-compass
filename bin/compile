@@ -155,7 +155,7 @@ package_download "scons" "${SCONS_VERSION}" "${VENDORED_SCONS}"
 PATH="$BUILD_DIR/bin:$PATH"
 echo "-----> Vendoring node into slug"
 mkdir -p "$BUILD_DIR/bin"
-cp "$VENDORED_NODE/bin/node" "$BUILD_DIR/bin/node"
+cp -a "$VENDORED_NODE/bin/node" "$BUILD_DIR/bin/node"
 
 # setting up paths for building
 PATH="$VENDORED_SCONS:$VENDORED_NODE/bin:$PATH"
@@ -191,7 +191,7 @@ echo "-----> Installing dependencies with npm"
 run_npm "install --production"
 # Good Eggs - rebuild is there for those who check in npm modules which we don't, but we need to touch fibrous to avoid warnings.
 # Since we cached based on the version of node/npm; we should get a new version of fibrous built if we push a new version of node.
-FIBERS_SRC_FILE=$CACHE_TARGET_DIR/fibrous/node_modules/fiberssrc/fibers
+FIBERS_SRC_FILE=$CACHE_TARGET_DIR/fibrous/node_modules/fibers/src/fibers.node
 if [ -f $FIBERS_SRC_FILE ]; then
   touch $FIBERS_SRC_FILE
 fi
