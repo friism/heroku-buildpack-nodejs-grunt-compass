@@ -166,6 +166,9 @@ export CPPPATH="$INCLUDE_PATH"
 # unpack existing cache
 if [ -d $CACHE_STORE_DIR ]; then
 
+  rm -rf $CACHE_STORE_DIR
+  mkdir -p $(dirname $CACHE_STORE_DIR)
+
   # generate a place to put node_modules
   TEMP_NODE_MODULES_DIR=$(mktmpdir node_modules)
 
@@ -176,12 +179,13 @@ if [ -d $CACHE_STORE_DIR ]; then
 
   # copy the cached node_modules in
   mkdir -p $CACHE_TARGET_DIR
-  echo "restoring from ${CACHE_STORE_DIR} to ${CACHE_TARGET_DIR}"
-  cp -av $CACHE_STORE_DIR/ $CACHE_TARGET_DIR/
+  echo "restoring from ${CACHE_STORE_DIR}/ to ${CACHE_TARGET_DIR}"
+  cp -av $CACHE_STORE_DIR/ $CACHE_TARGET_DIR
 
   # move existing node_modules back into place
   if [ -d $TEMP_NODE_MODULES_DIR/node_modules ]; then
-    cp -R $TEMP_NODE_MODULES_DIR/node_modules/* $CACHE_TARGET_DIR/
+    echo "restoring from ${TEMP_NODE_MODULES_DIR}/node_modules/* to ${CACHE_TARGET_DIR}/"
+    cp -Rv $TEMP_NODE_MODULES_DIR/node_modules/* $CACHE_TARGET_DIR/
   fi
 
 fi
@@ -197,6 +201,6 @@ echo "Dependencies installed" | indent
 if [ -d $CACHE_TARGET_DIR ]; then
   rm -rf $CACHE_STORE_DIR
   mkdir -p $(dirname $CACHE_STORE_DIR)
-  echo "caching to ${CACHE_STORE_DIR} from ${CACHE_TARGET_DIR}"
-  cp -av $CACHE_TARGET_DIR/ $CACHE_STORE_DIR/
+  echo "caching to ${CACHE_STORE_DIR} from ${CACHE_TARGET_DIR}/"
+  cp -av $CACHE_TARGET_DIR/ $CACHE_STORE_DIR
 fi
