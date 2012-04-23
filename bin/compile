@@ -166,9 +166,6 @@ export CPPPATH="$INCLUDE_PATH"
 # unpack existing cache
 if [ -d $CACHE_STORE_DIR ]; then
 
-  rm -rf $CACHE_STORE_DIR
-  mkdir -p $(dirname $CACHE_STORE_DIR)
-
   # generate a place to put node_modules
   TEMP_NODE_MODULES_DIR=$(mktmpdir node_modules)
 
