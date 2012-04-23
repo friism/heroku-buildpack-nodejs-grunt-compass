@@ -188,7 +188,8 @@ fi
 # install dependencies with npm
 echo "-----> Installing dependencies with npm"
 run_npm "install --production"
-run_npm "rebuild"
+# Good Eggs - rebuild is there for those who check in npm modules which we don't
+# run_npm "rebuild"
 echo "Dependencies installed" | indent
 
 # repack cache with new assets
