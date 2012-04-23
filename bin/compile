@@ -176,7 +176,8 @@ if [ -d $CACHE_STORE_DIR ]; then
 
   # copy the cached node_modules in
   mkdir -p $CACHE_TARGET_DIR
-  cp -a $CACHE_STORE_DIR/ $CACHE_TARGET_DIR/
+  echo "restoring from ${CACHE_STORE_DIR} to ${CACHE_TARGET_DIR}"
+  cp -av $CACHE_STORE_DIR/ $CACHE_TARGET_DIR/
 
   # move existing node_modules back into place
   if [ -d $TEMP_NODE_MODULES_DIR/node_modules ]; then
@@ -196,5 +197,6 @@ echo "Dependencies installed" | indent
 if [ -d $CACHE_TARGET_DIR ]; then
   rm -rf $CACHE_STORE_DIR
   mkdir -p $(dirname $CACHE_STORE_DIR)
-  cp -a $CACHE_TARGET_DIR/ $CACHE_STORE_DIR/
+  echo "caching to ${CACHE_STORE_DIR} from ${CACHE_TARGET_DIR}"
+  cp -av $CACHE_TARGET_DIR/ $CACHE_STORE_DIR/
 fi
