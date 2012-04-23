@@ -189,7 +189,12 @@ fi
 # install dependencies with npm
 echo "-----> Installing dependencies with npm"
 run_npm "install --production"
-# Good Eggs - rebuild is there for those who check in npm modules which we don't
+# Good Eggs - rebuild is there for those who check in npm modules which we don't, but we need to touch fibrous to avoid warnings.
+# Since we cached based on the version of node/npm; we should get a new version of fibrous built if we push a new version of node.
+FIBERS_SRC_FILE=$CACHE_TARGET_DIR/fibrous/node_modules/fiberssrc/fibers
+if [ -f $FIBERS_SRC_FILE ]; then
+  touch $FIBERS_SRC_FILE
+fi
 # run_npm "rebuild"
 echo "Dependencies installed" | indent
 
