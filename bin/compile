@@ -163,6 +163,9 @@ INCLUDE_PATH="$VENDORED_NODE/include"
 export CPATH="$INCLUDE_PATH"
 export CPPPATH="$INCLUDE_PATH"
 
+  rm -rf $CACHE_STORE_DIR
+  mkdir -p $(dirname $CACHE_STORE_DIR)
+
 # unpack existing cache
 if [ -d $CACHE_STORE_DIR ]; then
 
