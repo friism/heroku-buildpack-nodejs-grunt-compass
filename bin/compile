@@ -163,6 +163,9 @@ INCLUDE_PATH="$VENDORED_NODE/include"
 export CPATH="$INCLUDE_PATH"
 export CPPPATH="$INCLUDE_PATH"
 
+rm -rf $CACHE_STORE_DIR
+mkdir -p $CACHE_STORE_DIR
+
 # unpack existing cache
 if [ -d $CACHE_STORE_DIR ]; then
 
@@ -197,7 +200,7 @@ echo "Dependencies installed" | indent
 # repack cache with new assets
 if [ -d $CACHE_TARGET_DIR ]; then
   rm -rf $CACHE_STORE_DIR
-  mkdir -p $(dirname $CACHE_STORE_DIR)
+  mkdir -p $CACHE_STORE_DIR
   echo "caching to ${CACHE_STORE_DIR} from ${CACHE_TARGET_DIR}/"
   cp -av $CACHE_TARGET_DIR/ $CACHE_STORE_DIR
 fi
