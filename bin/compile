@@ -202,4 +202,4 @@ if [ -d $CACHE_TARGET_DIR ]; then
 fi
 
 # run buildpack cake task
-cake buildpack
+$BUILD_DIR/node_modules/.bin/cake buildpack
