@@ -203,4 +203,5 @@ fi
 
 # run buildpack cake task
 cd $BUILD_DIR
-./node_modules/.bin/cake buildpack
+export PATH="./node_modules/.bin:$PATH"
+cake buildpack
