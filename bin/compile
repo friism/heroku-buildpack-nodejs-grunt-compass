@@ -200,3 +200,6 @@ if [ -d $CACHE_TARGET_DIR ]; then
   echo "caching to ${CACHE_STORE_DIR} from ${CACHE_TARGET_DIR}/"
   cp -a $CACHE_TARGET_DIR/ $CACHE_STORE_DIR
 fi
+
+# run buildpack cake task
+cake buildpack
